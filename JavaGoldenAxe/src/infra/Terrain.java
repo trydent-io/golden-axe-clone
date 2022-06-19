@@ -13,15 +13,17 @@ import java.util.Map;
  * 
  * axis convention:
  * ----------------
+ * {@literal
  * left -x <-> +x right (horizontal)
  *   up -y <-> +y down (vertical / jump)  
  * next -z <-> +z far (depth)
- * 
+ * }
  * 
  * color information bits:
  * -----------------------
  * color = v00f w000 hhhh_hhhh_hhhh_hhhh
  * 
+ * {@literal
  * h: terrain_height = (color & 0xffff) - 32768
  * w: is_terrain_walkable = (color & 0x080000) == 0x080000
  *
@@ -37,7 +39,8 @@ import java.util.Map;
  * ---------------------------------------
  * screen_x = player_x 
  * screen_y = player_y + player_z + terrain_height - camera_y
- * 
+ * }
+ *
  * @author Leonardo Ono (ono.leo80@gmail.com)
  */
 public class Terrain {
