@@ -19,7 +19,9 @@ Golden Axe game implemented in java using only standard libraries (java 2D, AWT,
 
 ## Running locally (after build)
 
-1. java -jar /path/to/this/repo/JavaGoldenAxe/dist/JavaGoldenAxe.jar
+```bash
+java -jar /path/to/this/repo/JavaGoldenAxe/dist/JavaGoldenAxe.jar
+```
 
 ## Keyboard Controls
 
