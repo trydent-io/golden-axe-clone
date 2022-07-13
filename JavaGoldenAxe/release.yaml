@@ -318,32 +318,32 @@ release:
       # May define a `JRELEASER_MILESTONE_NAME` environment variable instead.
       # Defaults to `{{tagName}}`.
       #
-      name: '{{tagName}}'
+      name: 'v1.0.0'
 
     # The following properties define  URL formats.
     # Defaults are shown.
     # Review the available Name Templates.
 
     #
-    repoUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}
+    repoUrl: https://github.com/trydent-io/golden-axe-clone
 
     #
-    repoCloneUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}.git
+    repoCloneUrl: https://github.com/trydent-io/golden-axe-clone.git
 
     #
-    commitUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/commits
+    commitUrl: https://github.com/trydent-io/golden-axe-clone/commits
 
     #
-    srcUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/blob/{{repoBranch}}
+    srcUrl: https://github.com/trydent-io/golden-axe-clone/blob/main
 
     #
-    downloadUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}
+    downloadUrl: https://github.com/trydent-io/golden-axe-clone/releases/download/v1.0.0/v1.0.0.zip
 
     #
-    releaseNotesUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/tag/{{tagName}}
+    releaseNotesUrl: https://github.com/trydent-io/golden-axe-clone/releases/tag/v1.0.0
 
     #
-    latestReleaseUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/latest
+    latestReleaseUrl: https://github.com/trydent-io/golden-axe-clone/releases/latest
 
     #
-    issueTrackerUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/issues
+    issueTrackerUrl: https://github.com/trydent-io/golden-axe-clone/issues
