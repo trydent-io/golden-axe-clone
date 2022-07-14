@@ -16,7 +16,10 @@
     <mainClass>ax.battler.goldenaxe.Main</mainClass>
     <releaseName>golden-axe</releaseName>
 
-    <jreleaser.config.file>release.yaml</jreleaser.config.file>
+    <jreleaser.basedir>${project.basedir}/..</jreleaser.basedir>
+    <project.jreleaser.basedir>asd/..</project.jreleaser.basedir>
+    <app.distribution.directory>${project.build.directory}/dist</app.distribution.directory>
+    <!--<jreleaser.config.file>release.yaml</jreleaser.config.file>-->
 
   </properties>
 
@@ -103,16 +106,6 @@
           <javaOptions>
             <option>-Dfile.encoding=UTF-8</option>
           </javaOptions>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jreleaser</groupId>
-        <artifactId>jreleaser-maven-plugin</artifactId>
-        <version>1.1.0</version>
-        <configuration>
-          <jreleaser>
-
-          </jreleaser>
         </configuration>
       </plugin>
     </plugins>

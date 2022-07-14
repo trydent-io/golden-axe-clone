@@ -21,7 +21,68 @@
     <mainClass>ax.battler</mainClass>
     <releaseName>ax.battler</releaseName>
 
+    <full.release.file>${project.basedir}/target/dist/goldenaxe_1.0.0_amd64.deb</full.release.file>
+
     <exec-plugin.version>3.0.0</exec-plugin.version>
   </properties>
 
+  <licenses>
+    <license>
+      <name>Apache-2.0</name>
+      <url>https://spdx.org/licenses/Apache-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>derek-keeler</id>
+      <name>Leonardo Ono</name>
+    </developer>
+  </developers>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.jreleaser</groupId>
+          <artifactId>jreleaser-maven-plugin</artifactId>
+          <version>1.1.0</version>
+          <configuration>
+            <jreleaser>
+              <project>
+                <description>Golden Axe conversion in Java</description>
+                <docsUrl>https://github.com/derek-keeler/GoldenAxeClone</docsUrl>
+                <website>https://github.com/derek-keeler/GoldenAxeClone</website>
+              </project>
+              <release>
+                <github>
+                  <owner>trydent-io</owner>
+                  <overwrite>true</overwrite>
+                  <tagName>v1.0.0</tagName>
+                  <releaseName>Release v1.0.0</releaseName>
+                </github>
+              </release>
+              <distributions>
+                <app>
+                  <artifacts>
+                    <artifact>
+                      <path>${full.release.file}</path>
+                    </artifact>
+                  </artifacts>
+                </app>
+              </distributions>
+            </jreleaser>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.jreleaser</groupId>
+        <artifactId>jreleaser-maven-plugin</artifactId>
+        <version>1.1.0</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>
