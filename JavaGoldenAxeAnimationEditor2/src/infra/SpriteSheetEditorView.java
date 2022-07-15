@@ -1,7 +1,7 @@
-package infra;
+package ax.battler.goldenaxe.infra;
 
 
-import infra.Actors.Actor;
+import ax.battler.goldenaxe.infra.Actors.Actor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -29,17 +29,17 @@ public class SpriteSheetEditorView extends JPanel implements MouseListener {
 
     private BufferedImage image;
     private BufferedImage image2;
-    
+
     private AffineTransform transform;
     private int x;
     private int y;
 
     private Rectangle rectangle;
-    
+
     public SpriteSheetEditorView(Actor actor) {
         try {
             image = ImageIO.read(getClass().getResourceAsStream(actor.path + Actors.IMAGE));
-            image2 = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);            
+            image2 = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics ig2 = image2.getGraphics();
         } catch (IOException ex) {
             Logger.getLogger(SpriteSheetEditorView.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,7 +89,7 @@ public class SpriteSheetEditorView extends JPanel implements MouseListener {
 
         g.translate(-x, -y);
         g.drawImage(image, 0, 0, null);
-        
+
         g.setColor(Color.RED);
         g.draw(rectangle);
     }
@@ -112,7 +112,7 @@ public class SpriteSheetEditorView extends JPanel implements MouseListener {
     }
 
     // --- mouse ---
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
     }
@@ -128,22 +128,22 @@ public class SpriteSheetEditorView extends JPanel implements MouseListener {
             Point ptSrc = new Point(e.getX(), e.getY());
             Point ptDst = new Point();
             it.transform(ptSrc, ptDst);
-            
+
             Graphics i2g = image2.getGraphics();
             i2g.setColor(Color.MAGENTA);
             i2g.fillRect(0, 0, image2.getWidth(), image2.getHeight());
-            
+
             if (SwingUtilities.isLeftMouseButton(e)) {
                 rectangle.setBounds(ptDst.x, ptDst.y, 1, 1);
             }
-            
+
             extractSprite(rectangle, ptDst.x, ptDst.y);
-            
+
             //if (SwingUtilities.isMiddleMouseButton(e)) {
                 rectangle.width -= rectangle.x - 1;
                 rectangle.height -= rectangle.y - 1;
             //}
-            
+
             System.out.println("sprite animationid RIGHT " + rectangle.x + " " + rectangle.y + " " + rectangle.width + " " + rectangle.height + " 0 0");
         } catch (NoninvertibleTransformException ex) {
             Logger.getLogger(SpriteSheetEditorView.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,7 +163,7 @@ public class SpriteSheetEditorView extends JPanel implements MouseListener {
     }
 
     // --- extract sprite ---
-    
+
     public void extractSprite(Rectangle r, int x, int y) {
         if (getImageRGB(x, y) == image.getRGB(1, 1) || getImage2RGB(x, y) == 0xFFFFFFFF) {
             return;

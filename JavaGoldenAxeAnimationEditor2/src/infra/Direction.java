@@ -1,14 +1,14 @@
-package infra;
+package ax.battler.goldenaxe.infra;
 
 /**
  * Direction enum class.
- * 
+ *
  * @author Leonardo Ono (ono.leo80@gmail.com)
  */
 public enum Direction {
-    
+
     RIGHT(1, 0), DOWN(0, 1), LEFT(-1, 0), UP(0, -1), IDLE(0, 0);
-    
+
     private final int dx;
     private final int dy;
 
@@ -24,7 +24,7 @@ public enum Direction {
     public int getDy() {
         return dy;
     }
-        
+
     public Direction getOpposite() {
         switch (this) {
             case LEFT : return Direction.RIGHT;
@@ -32,11 +32,11 @@ public enum Direction {
             case UP : return Direction.DOWN;
             case DOWN : return Direction.UP;
             default : return Direction.IDLE;
-        }        
+        }
     }
-    
+
     public static Direction getRandom() {
         return Direction.values()[(int) (Math.random() * 4)];
     }
-    
+
 }

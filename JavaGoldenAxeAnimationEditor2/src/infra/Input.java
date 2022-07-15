@@ -1,4 +1,4 @@
-package infra;
+package ax.battler.goldenaxe.infra;
 
 
 
@@ -9,11 +9,11 @@ import java.util.Set;
 
 /**
  * Input class.
- * 
+ *
  * @author Leonardo Ono (ono.leo80@gmail.com)
  */
 public class Input implements KeyListener {
-    
+
     private static Set<Integer> keyPressed = new HashSet<>();
     private static Set<Integer> keyPressedConsumed = new HashSet<>();
     private static KeyListener listener;
@@ -27,15 +27,15 @@ public class Input implements KeyListener {
     }
 
     public static synchronized boolean isKeyJustPressed(int keyCode) {
-        if (!keyPressedConsumed.contains(keyCode) 
+        if (!keyPressedConsumed.contains(keyCode)
                 && keyPressed.contains(keyCode)) {
-            
+
             keyPressedConsumed.add(keyCode);
             return true;
         }
         return false;
     }
-    
+
     @Override
     public synchronized void keyTyped(KeyEvent e) {
         if (listener != null) {
@@ -50,7 +50,7 @@ public class Input implements KeyListener {
             listener.keyPressed(e);
         }
     }
-    
+
     @Override
     public synchronized void keyReleased(KeyEvent e) {
         keyPressed.remove(e.getKeyCode());
@@ -59,5 +59,5 @@ public class Input implements KeyListener {
             listener.keyReleased(e);
         }
     }
-    
+
 }

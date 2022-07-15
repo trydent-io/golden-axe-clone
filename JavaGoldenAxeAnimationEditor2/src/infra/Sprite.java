@@ -1,4 +1,4 @@
-package infra;
+package ax.battler.goldenaxe.infra;
 
 
 import java.awt.Graphics2D;
@@ -21,10 +21,10 @@ public class Sprite {
     private Direction originalDirection;
     private final Rectangle rectangle;
     private Map<String, Point> points = new HashMap<>();
-    
+
     public Sprite(String id, BufferedImage image, int ox, int oy
             , Direction originalDirection, Rectangle rectangle) {
-        
+
         this.id = id;
         this.image = image;
         origin = new Point(ox, oy);
@@ -59,20 +59,20 @@ public class Sprite {
     public void  addPoint(String name, int x, int y) {
         points.put(name, new Point(x, y));
     }
-    
+
     public Point getPoint(String name) {
         return points.get(name);
     }
-    
+
     public void draw(Graphics2D g, int x, int y) {
         g.drawImage(image, x - origin.x, y - origin.y, null);
     }
 
     @Override
     public String toString() {
-        return "sprite " + id + " " + originalDirection + " " 
-                + rectangle.x + " " + rectangle.y + " " + rectangle.width + " " 
+        return "sprite " + id + " " + originalDirection + " "
+                + rectangle.x + " " + rectangle.y + " " + rectangle.width + " "
                 + rectangle.height + " " + origin.x + " " + origin.y;
     }
-    
+
 }

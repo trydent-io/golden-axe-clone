@@ -1,7 +1,7 @@
-package infra;
+package ax.battler.goldenaxe.infra;
 
 
-import infra.Actors.Actor;
+import ax.battler.goldenaxe.infra.Actors.Actor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,13 +24,13 @@ public class SpriteCenterEditorView extends JPanel implements KeyListener, Mouse
     private String projectPath;
     private static String file;
     private String spriteFile;
-    
+
     private SpriteSheet spriteSheet;
     private double x;
     private double y;
     private int frame;
 
-    
+
     public SpriteCenterEditorView(Actor actor) {
         projectPath = System.getProperty("user.dir") + "\\";
         spriteFile = actor.path + Actors.IMAGE;
@@ -81,16 +81,16 @@ public class SpriteCenterEditorView extends JPanel implements KeyListener, Mouse
         g.clearRect(0, 0, getWidth(), getHeight());
 
         g.scale(2.5, 2.5);
-        
+
         g.drawString("frame: " + frame, 10, 10);
-        
+
         g.translate(276 / 2, 207 / 2);
-        
+
         spriteSheet.getSprites().get(frame).draw(g, 0, 0);
-        
+
         g.drawString("" + spriteSheet.getSprites().get(frame).getId(), 50, 30);
         g.drawString("" + spriteSheet.getSprites().get(frame).getOriginalDirection(), 50, 50);
-                
+
         g.drawLine(-276 / 2, 0, 276, 0);
         g.drawLine(0, -207 / 2, 0, 207);
 
@@ -114,7 +114,7 @@ public class SpriteCenterEditorView extends JPanel implements KeyListener, Mouse
     }
 
     // --- mouse ---
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
     }
@@ -136,39 +136,39 @@ public class SpriteCenterEditorView extends JPanel implements KeyListener, Mouse
     }
 
     // --- KeyListener ---
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        
+
         if (e.getKeyCode() == KeyEvent.VK_1) {
             if (frame > 0) {
                 frame--;
                 x = spriteSheet.getSprites().get(frame).getOrigin().x;
                 y = spriteSheet.getSprites().get(frame).getOrigin().y;
             }
-        } 
+        }
         else if (e.getKeyCode() == KeyEvent.VK_2) {
             if (frame < spriteSheet.getSprites().size() - 1) {
                 frame++;
                 x = spriteSheet.getSprites().get(frame).getOrigin().x;
                 y = spriteSheet.getSprites().get(frame).getOrigin().y;
             }
-        }        
+        }
 
         if (e.getKeyCode() == KeyEvent.VK_S) {
             saveSpriteSheet();
-        } 
-        
+        }
+
         if (e.getKeyCode() == KeyEvent.VK_L) {
             spriteSheet.getSprites().get(frame).setOriginalDirection(Direction.LEFT);
-        } 
+        }
         if (e.getKeyCode() == KeyEvent.VK_R) {
             spriteSheet.getSprites().get(frame).setOriginalDirection(Direction.RIGHT);
-        } 
+        }
     }
 
     @Override
@@ -187,5 +187,5 @@ public class SpriteCenterEditorView extends JPanel implements KeyListener, Mouse
             Logger.getLogger(SpriteCenterEditorView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

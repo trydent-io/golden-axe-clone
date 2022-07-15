@@ -1,4 +1,4 @@
-package infra;
+package ax.battler.goldenaxe.infra;
 
 
 import java.awt.Graphics2D;
@@ -29,7 +29,7 @@ public class SpriteSheet {
         loadImage(imageRes);
         loadSprites(spritesRes);
     }
-    
+
     private void loadImage(String imageRes) {
         try {
             image = ImageIO.read(getClass().getResourceAsStream(imageRes));
@@ -38,7 +38,7 @@ public class SpriteSheet {
             System.exit(1);
         }
     }
-    
+
     private void loadSprites(String spritesRes) {
         try {
             InputStream is = getClass().getResourceAsStream(spritesRes);
@@ -61,10 +61,10 @@ public class SpriteSheet {
                     int oy = Integer.parseInt(data[8]);
                     BufferedImage subimage = image.getSubimage(x, y, width, height);
                     Rectangle rectangle = new Rectangle(x, y, width, height);
-                    
+
                     Sprite sprite = new Sprite(
                             id, subimage, ox, oy, originalDirection, rectangle);
-                    
+
                     sprites.add(sprite);
                 }
             }
@@ -86,13 +86,13 @@ public class SpriteSheet {
     public List<Sprite> getSprites() {
         return sprites;
     }
-    
+
     public Sprite getSprite() {
         return sprites.get(frame);
     }
-    
+
     public void draw(Graphics2D g, int x, int y) {
         sprites.get(frame).draw(g, x, y);
     }
-    
+
 }

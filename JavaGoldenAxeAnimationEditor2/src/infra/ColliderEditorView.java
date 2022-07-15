@@ -1,8 +1,8 @@
-package infra;
+package ax.battler.goldenaxe.infra;
 
 
-import infra.Actors.Actor;
-import infra.Collider.Type;
+import ax.battler.goldenaxe.infra.Actors.Actor;
+import ax.battler.goldenaxe.infra.Collider.Type;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -27,7 +27,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * Colliders
- * 
+ *
  * @author Leonardo Ono (ono.leo80@gmail.com);
  */
 public class ColliderEditorView extends JPanel implements KeyListener, MouseListener {
@@ -37,19 +37,19 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
     public String projectPath;
     public String file;
     public String imageFile;
-    
+
     private BufferedImage image;
     private int x;
     private int y;
-    
+
     private List<Collider> colliders = new ArrayList<>();
     private Collider currentCollider;
-    
+
     private static final Color SELECTED_ATTACK = new Color(255, 0, 0, 128);
     private static final Color SELECTED_BODY = new Color(0, 0, 255, 128);
     private static final Color SELECTED_FIRE = new Color(255, 255, 0, 128);
     private static final Color SELECTED_TOUCH = new Color(0, 255, 255, 128);
-    
+
     public ColliderEditorView(Actor actor) {
         projectPath = System.getProperty("user.dir") + "\\";
         file = actor.path + Actors.COLLIDERS;
@@ -83,67 +83,67 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
 
     private void update() {
         double speed = 4;
-        
+
         // scroll screen
         if (Input.isKeyPressed(KeyEvent.VK_LEFT)) {
             x -= speed;
-        } 
+        }
         if (Input.isKeyPressed(KeyEvent.VK_RIGHT)) {
             x += speed;
         }
 
         if (Input.isKeyPressed(KeyEvent.VK_UP)) {
             y -= speed;
-        } 
+        }
         if (Input.isKeyPressed(KeyEvent.VK_DOWN)) {
             y += speed;
         }
 
         speed = 1;
-        
+
         if (Input.isKeyJustPressed(KeyEvent.VK_G)) {
             currentCollider.x -= speed;
-        } 
+        }
         if (Input.isKeyJustPressed(KeyEvent.VK_J)) {
             currentCollider.x += speed;
         }
 
         if (Input.isKeyJustPressed(KeyEvent.VK_Y)) {
             currentCollider.y -= speed;
-        } 
+        }
         if (Input.isKeyJustPressed(KeyEvent.VK_H)) {
             currentCollider.y += speed;
         }
 
         if (Input.isKeyJustPressed(KeyEvent.VK_S)) {
             currentCollider.width -= speed;
-        } 
+        }
         if (Input.isKeyJustPressed(KeyEvent.VK_F)) {
             currentCollider.width += speed;
         }
 
         if (Input.isKeyJustPressed(KeyEvent.VK_E)) {
             currentCollider.height -= speed;
-        } 
+        }
         if (Input.isKeyJustPressed(KeyEvent.VK_D)) {
             currentCollider.height += speed;
         }
-        
+
     }
 
     private void draw(Graphics2D g) {
         g.clearRect(0, 0, getWidth(), getHeight());
 
         g.scale(SCALE, SCALE);
-        
+
         //g.translate(276 / 2, 207 / 2);
         //g.drawLine(-276 / 2, 0, 276, 0);
         //g.drawLine(0, -207 / 2, 0, 207);
 
         g.translate(-x, -y);
-        
+
         g.drawImage(image, 0, 0, null);
-        
+
         for (Collider collider : colliders) {
 
             if (currentCollider != null && currentCollider == collider) {
@@ -176,10 +176,10 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
                 }
                 g.drawRect(collider.x, collider.y, collider.width, collider.height);
             }
-            
+
             g.drawString("" + collider.getReaction(), collider.x + 16, collider.y);
         }
-        
+
     }
 
     public static void show(final Actor actor) {
@@ -200,12 +200,12 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
     }
 
     // --- mouse ---
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
         int cx = (int) ((e.getX()) / SCALE) + x;
         int cy = (int) ((e.getY()) / SCALE) + y;
-        
+
         // select existent collider
         for (Collider collider : colliders) {
             if (collider.contains(cx, cy)) {
@@ -213,7 +213,7 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
                 return;
             }
         }
-        
+
         // new collider
         int cwidth = (int) (50 / 2.5);
         int cheight = (int) (50 / 2.5);
@@ -237,23 +237,23 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
     }
 
     // --- KeyListener ---
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        
+
         if (e.getKeyCode() == KeyEvent.VK_1) {
-        } 
+        }
         else if (e.getKeyCode() == KeyEvent.VK_2) {
-        }        
+        }
 
         // save file
         if (e.getKeyCode() == KeyEvent.VK_0) {
             saveColliders();
-        } 
+        }
 
         // set attack type
         if (e.getKeyCode() == KeyEvent.VK_1 && currentCollider != null) {
@@ -281,12 +281,12 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
             currentCollider.setReaction(Collider.Reaction.MOUNT);
         }
 
-        
+
         // set attack collider type
         if (e.getKeyCode() == KeyEvent.VK_A && currentCollider != null) {
             currentCollider.setType(Collider.Type.ATTACK);
         }
-        
+
         // set body collider type
         if (e.getKeyCode() == KeyEvent.VK_B && currentCollider != null) {
             currentCollider.setType(Collider.Type.BODY);
@@ -306,13 +306,13 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
         if (e.getKeyCode() == KeyEvent.VK_DELETE && currentCollider != null) {
             colliders.remove(currentCollider);
             currentCollider = null;
-        } 
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
     }
- 
+
     private void loadColliders() {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(file)));
@@ -332,7 +332,7 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
                         reaction = Collider.Reaction.valueOf(data[2]);
                     }
                     catch (IllegalArgumentException e) {}
-                    
+
                     int x = Integer.parseInt(data[3]);
                     int y = Integer.parseInt(data[4]);
                     int width = Integer.parseInt(data[5]);
@@ -346,9 +346,9 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
         }
         catch (Exception ex) {
             Logger.getLogger(SpriteCenterEditorView.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }
-    
+
     private void saveColliders() {
         try {
             PrintWriter pw = new PrintWriter(projectPath + "res/" +  file);
@@ -359,7 +359,7 @@ public class ColliderEditorView extends JPanel implements KeyListener, MouseList
         }
         catch (Exception ex) {
             Logger.getLogger(SpriteCenterEditorView.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }
-    
+
 }

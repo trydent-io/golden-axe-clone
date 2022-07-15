@@ -1,7 +1,7 @@
-package infra;
+package ax.battler.goldenaxe.infra;
 
 
-import infra.Actors.Actor;
+import ax.battler.goldenaxe.infra.Actors.Actor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -29,7 +29,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * Points editor
- * 
+ *
  * @author Leonardo Ono (ono.leo80@gmail.com);
  */
 public class SpritePointsEditor extends JPanel implements KeyListener, MouseListener {
@@ -50,11 +50,11 @@ public class SpritePointsEditor extends JPanel implements KeyListener, MouseList
         public String toString() {
             return "point " + id + " " + x + " " + y;
         }
-        
+
     }
-    
+
     public static final double SCALE = 2.5;
-    
+
     public String projectPath;
     public String file;
     public String imageFile;
@@ -62,10 +62,10 @@ public class SpritePointsEditor extends JPanel implements KeyListener, MouseList
     private BufferedImage image;
     private int x;
     private int y;
-    
+
     private List<MyPoint> points = new ArrayList<>();
     private MyPoint currentPoint;
-    
+
     public SpritePointsEditor(Actor actor) {
         projectPath = System.getProperty("user.dir") + "\\";
         file = actor.path + Actors.POINTS;
@@ -99,53 +99,53 @@ public class SpritePointsEditor extends JPanel implements KeyListener, MouseList
 
     private void update() {
         double speed = 4;
-        
+
         // scroll screen
         if (Input.isKeyPressed(KeyEvent.VK_LEFT)) {
             x -= speed;
-        } 
+        }
         if (Input.isKeyPressed(KeyEvent.VK_RIGHT)) {
             x += speed;
         }
 
         if (Input.isKeyPressed(KeyEvent.VK_UP)) {
             y -= speed;
-        } 
+        }
         if (Input.isKeyPressed(KeyEvent.VK_DOWN)) {
             y += speed;
         }
 
         speed = 1;
-        
+
         if (Input.isKeyJustPressed(KeyEvent.VK_G)) {
             currentPoint.x -= speed;
-        } 
+        }
         if (Input.isKeyJustPressed(KeyEvent.VK_J)) {
             currentPoint.x += speed;
         }
 
         if (Input.isKeyJustPressed(KeyEvent.VK_Y)) {
             currentPoint.y -= speed;
-        } 
+        }
         if (Input.isKeyJustPressed(KeyEvent.VK_H)) {
             currentPoint.y += speed;
         }
-        
+
     }
 
     private void draw(Graphics2D g) {
         g.clearRect(0, 0, getWidth(), getHeight());
 
         g.scale(SCALE, SCALE);
-        
+
         //g.translate(276 / 2, 207 / 2);
         //g.drawLine(-276 / 2, 0, 276, 0);
         //g.drawLine(0, -207 / 2, 0, 207);
 
         g.translate(-x, -y);
-        
+
         g.drawImage(image, 0, 0, null);
-        
+
         for (MyPoint point : points) {
 
             if (currentPoint != null && currentPoint == point) {
@@ -180,13 +180,13 @@ public class SpritePointsEditor extends JPanel implements KeyListener, MouseList
 
     // --- mouse ---
     private final Rectangle currentCollider = new Rectangle();
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
         int cx = (int) ((e.getX()) / SCALE) + x;
         int cy = (int) ((e.getY()) / SCALE) + y;
-        
-        
+
+
         // select existent collider
         for (MyPoint point : points) {
             currentCollider.setBounds(point.x - 4, point.y - 4, 8, 8);
@@ -195,7 +195,7 @@ public class SpritePointsEditor extends JPanel implements KeyListener, MouseList
                 return;
             }
         }
-        
+
         // new point
         String newPointId = JOptionPane.showInputDialog("new point id");
         points.add(currentPoint = new MyPoint(newPointId, cx, cy));
@@ -218,36 +218,36 @@ public class SpritePointsEditor extends JPanel implements KeyListener, MouseList
     }
 
     // --- KeyListener ---
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        
+
         if (e.getKeyCode() == KeyEvent.VK_1) {
-        } 
+        }
         else if (e.getKeyCode() == KeyEvent.VK_2) {
-        }        
-        
+        }
+
         // delete
         if (e.getKeyCode() == KeyEvent.VK_DELETE && currentPoint != null) {
             points.remove(currentPoint);
             currentPoint = null;
-        } 
-        
+        }
+
         // save file
         if (e.getKeyCode() == KeyEvent.VK_0) {
             savePoints();
-        } 
+        }
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
     }
- 
+
     private void loadPoints() {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(file)));
@@ -270,9 +270,9 @@ public class SpritePointsEditor extends JPanel implements KeyListener, MouseList
         }
         catch (Exception ex) {
             Logger.getLogger(SpriteCenterEditorView.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }
-    
+
     private void savePoints() {
         try {
             PrintWriter pw = new PrintWriter(projectPath + "res/" + file);
@@ -283,7 +283,7 @@ public class SpritePointsEditor extends JPanel implements KeyListener, MouseList
         }
         catch (Exception ex) {
             Logger.getLogger(SpriteCenterEditorView.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }
-    
+
 }
