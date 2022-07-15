@@ -25,4 +25,4 @@ jobs:
     - name: Build with Maven
       env:
         JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}
-      run: mvn -f JavaGoldenAxe clean compile javafx:jlink jpackage:jpackage && mvn -rf :ax.battler.goldenaxe jreleaser:full-release
+      run: mvn -f ax.battler.goldenaxe clean compile javafx:jlink jpackage:jpackage && mvn -rf :ax.battler.goldenaxe jreleaser:full-release
